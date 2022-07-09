@@ -145,3 +145,6 @@ dist
 
 # Build directory for the project.
 build
+
+# Temporary files for building the project.
+solutions
