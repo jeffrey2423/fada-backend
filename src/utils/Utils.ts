@@ -1,4 +1,30 @@
+import { Response, Request } from "express";
+import path from "path";
+import fs from "fs";
 module Utils {
+
+  export enum ContentType {
+    JSON = "application/json",
+    TEXT = "text/plain",
+    HTML = "text/html",
+    PDF = "application/pdf",
+    ZIP = "application/zip",
+    EXCEL = "application/vnd.ms-excel",
+    WORD = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    POWERPOINT = "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  }
+
+  export enum HTTPStatus {
+    OK = 200,
+    CREATED = 201,
+    NO_CONTENT = 204,
+    BAD_REQUEST = 400,
+    UNAUTHORIZED = 401,
+    FORBIDDEN = 403,
+    NOT_FOUND = 404,
+    INTERNAL_SERVER_ERROR = 500,
+  }
+
   export function ReadFileData(fileData: any): string {
     try {
       return fileData.toString("utf8");
@@ -66,17 +92,50 @@ module Utils {
     return flag;
   }
 
-  export function StringToBlob(str: string): Blob {
-    let blob: Blob = new Blob([str], { type: "text/plain" });
-    return blob;
-  }
-
   export function HoursToSeconds(hours: number): number {
     return hours * 60 * 60;
   }
 
   export function StringHoursToSeconds(hours: string): number {
     return HoursToSeconds(parseInt(hours));
+  }
+
+  export function SendSolutionFile(
+    req: Request,
+    res: Response,
+    solutionData: string
+  ): void {
+    let solutionFileName: string;
+    let pathSolutionFile!: string;
+    try {
+      solutionFileName = `solution_${new Date().getTime()}.txt`;
+      pathSolutionFile = path.join(
+        __dirname,
+        "..",
+        "..",
+        "solutions",
+        solutionFileName
+      );
+      fs.writeFileSync(pathSolutionFile, solutionData);
+      res.setHeader(
+        "Content-disposition",
+        `attachment; filename=${solutionFileName}`
+      );
+      res.setHeader("Content-Type", ContentType.TEXT);
+      res.download(pathSolutionFile, () => {
+        fs.unlinkSync(pathSolutionFile);
+      });
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  export function CreateSolutionFileData(...args: string[]): string {
+    let solutionData: string = "";
+    for (let i = 0; i < args.length; i++) {
+      solutionData += args[i] + "\n";
+    }
+    return solutionData;
   }
 }
 
