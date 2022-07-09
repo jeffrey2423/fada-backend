@@ -1,31 +1,37 @@
-import { Router } from 'express';
-import { IRouter } from '../interfaces/IRouter';
+import { Router } from "express";
+import { IRouter } from "../interfaces/IRouter";
 
 import SalaOperacionesServices from "../services/SalaOperacionesServices";
 
-class SalaOperaciones implements IRouter {
+class CopiaLibros implements IRouter {
+  private router: Router;
+  private salaOperacionesServices: SalaOperacionesServices;
 
-    private router: Router;
+  constructor() {
+    this.salaOperacionesServices = new SalaOperacionesServices();
+    this.router = Router();
+    this.registerRoutes();
+  }
+  public getRouter(): Router {
+    return this.router;
+  }
+  private registerRoutes(): void {
+    this.router
+      .route("/SolutionDivideAndConquer")
+      .post(
+        this.salaOperacionesServices.SolutionDivideAndConquer.bind(
+          this.salaOperacionesServices
+        )
+      ); //Se agrega el this porque la instancia original se estaba perdiendo al ser llamado desde una funcion tercera
 
-    constructor() {
-        this.router = Router();
-        this.InitRouter();
-    }
-
-    public getRouter(): Router {
-        return this.router;
-    }
-
-    private InitRouter(): void {
-        this.HelloWorld();
-    }
-
-    private HelloWorld(): void {
-        this.router.get('/', (_req, res) => {
-            res.send('Hello World');
-        });
-    }
-
+    this.router
+      .route("/SolutionDynamicProgramming")
+      .post(
+        this.salaOperacionesServices.SolutionDynamicProgramming.bind(
+          this.salaOperacionesServices
+        )
+      );
+  }
 }
 
-export default SalaOperaciones;
+export default CopiaLibros;

@@ -1,5 +1,5 @@
 import { Router } from "express";
 
-export interface IRouter{
-    getRouter: () => Router;
+export interface IRouter {
+  getRouter: () => Router;
 }

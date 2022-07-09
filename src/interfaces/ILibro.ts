@@ -1,4 +1,4 @@
 export interface ILibro {
-    nombre: string;
-    paginas: number;
+  nombre: string;
+  paginas: number;
 }

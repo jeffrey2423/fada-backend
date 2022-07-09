@@ -7,7 +7,7 @@
     "dev": "ts-node-dev src/Index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node build/Index.js"
+    "start": "tsc && node build/Index.js"
   },
   "repository": {
     "type": "git",
