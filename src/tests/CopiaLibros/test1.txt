@@ -1,0 +1,4 @@
+3,5
+la senda del perdedor,35
+la iliada,100
+la odisea,60
