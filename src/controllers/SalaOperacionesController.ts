@@ -6,12 +6,14 @@ class SalaOperacionesController {
   private problemDataArray: string[];
   private procedimientos: IProcedimiento[];
   private cantidadProcedimientos: number;
+  private horaMaximaEnSegundos: number;
 
   constructor() {
     this.problemData = "";
     this.problemDataArray = [];
     this.procedimientos = [];
     this.cantidadProcedimientos = 0;
+    this.horaMaximaEnSegundos = Utils.HoursToSeconds(24);
   }
 
   /**
@@ -59,8 +61,8 @@ class SalaOperacionesController {
         let arrayDeCadenas: string[] = objCadenaDividida.cadena;
         procedimiento = {
           nombre: arrayDeCadenas[0],
-          horaInicio: parseInt(arrayDeCadenas[1]),
-          horaFin: parseInt(arrayDeCadenas[2]),
+          horaInicioEnSegundos: Utils.HoraASeguntos(arrayDeCadenas[1]),
+          horaFinEnSegundos: Utils.HoraASeguntos(arrayDeCadenas[2]),
         };
         this.procedimientos.push(procedimiento);
       }

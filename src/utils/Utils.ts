@@ -2,7 +2,6 @@ import { Response, Request } from "express";
 import path from "path";
 import fs from "fs";
 module Utils {
-
   export enum ContentType {
     JSON = "application/json",
     TEXT = "text/plain",
@@ -96,8 +95,36 @@ module Utils {
     return hours * 60 * 60;
   }
 
-  export function StringHoursToSeconds(hours: string): number {
-    return HoursToSeconds(parseInt(hours));
+  export function MinutesToSeconds(minutes: number): number {
+    return minutes * 60;
+  }
+
+  export function SecondsToHoursAndMinutes(seconds: number): string {
+    let hours: number = Math.floor(seconds / 3600);
+    let minutes: number = Math.floor((seconds - hours * 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  }
+
+  export function HoraASeguntos(hora: string): number {
+    let horaFinalEnSegundos: number = 0;
+    let objHoras: any;
+    let horaEnSegundos: number;
+    let minutosEnSegundos: number;
+
+    try {
+      objHoras = DividirCadena(hora, ":", false);
+      if (!objHoras.status) {
+        throw new Error("Error al dividir la hora, verifique el archivo");
+      }
+
+      horaEnSegundos = HoursToSeconds(parseInt(objHoras.cadena[0]));
+      minutosEnSegundos = MinutesToSeconds(parseInt(objHoras.cadena[1]));
+
+      horaFinalEnSegundos = horaEnSegundos + minutosEnSegundos;
+    } catch (error) {
+      throw error;
+    }
+    return horaFinalEnSegundos;
   }
 
   export function SendSolutionFile(
