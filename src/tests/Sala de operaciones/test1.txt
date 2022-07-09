@@ -1,0 +1,4 @@
+3
+cirugia apendicitis,13:26,14:15
+cirugia hernia,08:26,10:15
+cirugia ojos,20:26,23:15
