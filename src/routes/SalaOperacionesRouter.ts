@@ -17,17 +17,17 @@ class CopiaLibros implements IRouter {
   }
   private registerRoutes(): void {
     this.router
-      .route("/SolutionDivideAndConquer")
+      .route("/SolucionRecursiva")
       .post(
-        this.salaOperacionesServices.SolutionDivideAndConquer.bind(
+        this.salaOperacionesServices.SolucionRecursiva.bind(
           this.salaOperacionesServices
         )
       ); //Se agrega el this porque la instancia original se estaba perdiendo al ser llamado desde una funcion tercera
 
     this.router
-      .route("/SolutionDynamicProgramming")
+      .route("/SolucionDinamica")
       .post(
-        this.salaOperacionesServices.SolutionDynamicProgramming.bind(
+        this.salaOperacionesServices.SolucionDinamica.bind(
           this.salaOperacionesServices
         )
       );

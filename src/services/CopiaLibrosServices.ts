@@ -10,11 +10,6 @@ class CopiaLibrosServices {
    this.copiaLibrosController = new CopiaLibrosController();
   }
 
-  /**
-   * Soluciona el problema de la copia de libros usando el algoritmo de divide y vencerás
-   * @param req  Solicitud de la peticion
-   * @param res  Respuesta de la peticion
-   */
   public SolutionDivideAndConquer(req: any, res: Response): void {
     try {
 
@@ -35,11 +30,6 @@ class CopiaLibrosServices {
     }
   }
 
-  /**
-   * Soluciona el problema de la copia de libros usando el algoritmo de programacion dinamica
-   * @param req Solicitud de la peticion
-   * @param res Respuesta de la peticion
-   */
   public SolutionDynamicProgramming(req: any, res: Response): void {
     try {
       if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {

@@ -16,12 +16,6 @@ class CopiaLibrosController{
       this.cantidadLibros = 0;
     }
     
-  /**
-   * Inicializa los datos del problema
-   * @param fileData Datos del problema
-   * @returns void
-   * @throws Error
-   */
   public InitializeProblemData(fileData: any): void {
     try {
       this.problemData = Utils.ReadFileData(fileData);
@@ -41,11 +35,6 @@ class CopiaLibrosController{
     }
   }
 
-  /**
-   * Obtiene los libros del problema
-   * @returns void
-   * @throws Error
-   */
   private ObtenerLibros(): void {
     let libro: ILibro;
     try {
@@ -70,11 +59,6 @@ class CopiaLibrosController{
     }
   }
 
-  /**
-   * Obtiene los datos generales del problema
-   * @returns void
-   * @throws Error
-   */
   private ObtenerOtrosDatos(): void {
     try {
       let linea: string = this.problemDataArray[0];
