@@ -25,7 +25,11 @@ class SalaOperacionesServices {
         req.files?.file.data
       );
       this.salaOperacionescontroller.LlamarSolucionRecursiva();
-      res.send(this.salaOperacionescontroller.getSolutionFileData());
+      res.send(
+        Utils.SecondsToHoursAndMinutes(
+          parseInt(this.salaOperacionescontroller.getSolutionFileData())
+        )
+      );
       // Utils.SendSolutionFile(
       //   req,
       //   res,
@@ -50,7 +54,11 @@ class SalaOperacionesServices {
         req.files?.file.data
       );
       this.salaOperacionescontroller.LlamarSolucionDinamica();
-      res.send(this.salaOperacionescontroller.getSolutionFileData());
+      res.send(
+        Utils.SecondsToHoursAndMinutes(
+          parseInt(this.salaOperacionescontroller.getSolutionFileData())
+        )
+      );
 
       // Utils.SendSolutionFile(
       //   req,
