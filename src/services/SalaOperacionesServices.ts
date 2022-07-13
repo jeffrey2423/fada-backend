@@ -1,6 +1,5 @@
 import Utils from "../utils/Utils";
 import { Response } from "express";
-import { IProcedimiento } from "../interfaces/IProcedimiento";
 
 import SalaOperacionesController from "../controllers/SalaOperacionesController";
 
@@ -25,16 +24,12 @@ class SalaOperacionesServices {
         req.files?.file.data
       );
       this.salaOperacionescontroller.LlamarSolucionRecursiva();
-      res.send(
-        Utils.SecondsToHoursAndMinutes(
-          parseInt(this.salaOperacionescontroller.getSolutionFileData())
-        )
+      Utils.SendSolutionFile(
+        req,
+        res,
+        this.salaOperacionescontroller.getSolutionFileData(),
+        "RecursivaSalaOperaciones"
       );
-      // Utils.SendSolutionFile(
-      //   req,
-      //   res,
-      //   this.salaOperacionescontroller.getSolutionFileData()
-      // );
     } catch (error: any) {
       res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
     }
@@ -54,17 +49,12 @@ class SalaOperacionesServices {
         req.files?.file.data
       );
       this.salaOperacionescontroller.LlamarSolucionDinamica();
-      res.send(
-        Utils.SecondsToHoursAndMinutes(
-          parseInt(this.salaOperacionescontroller.getSolutionFileData())
-        )
+      Utils.SendSolutionFile(
+        req,
+        res,
+        this.salaOperacionescontroller.getSolutionFileData(),
+        "DinamicaSalaOperaciones"
       );
-
-      // Utils.SendSolutionFile(
-      //   req,
-      //   res,
-      //   Utils.CreateSolutionFileData("hola", "hola", "hola")
-      // );
     } catch (error: any) {
       res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
     }

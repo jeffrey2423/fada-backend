@@ -10,7 +10,7 @@ class CopiaLibrosServices {
    this.copiaLibrosController = new CopiaLibrosController();
   }
 
-  public SolutionDivideAndConquer(req: any, res: Response): void {
+  public SolucionRecursiva(req: any, res: Response): void {
     try {
 
       if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {
@@ -23,14 +23,15 @@ class CopiaLibrosServices {
       Utils.SendSolutionFile(
         req,
         res,
-        Utils.CreateSolutionFileData("hola", "hola", "hola")
+        "",
+        "RecursivaCopiaLibros"
       );
     } catch (error: any) {
       res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
     }
   }
 
-  public SolutionDynamicProgramming(req: any, res: Response): void {
+  public SolucionDinamica(req: any, res: Response): void {
     try {
       if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {
         res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send("No se ha enviado ningun archivo");
@@ -40,7 +41,8 @@ class CopiaLibrosServices {
       Utils.SendSolutionFile(
         req,
         res,
-        Utils.CreateSolutionFileData("hola", "hola", "hola")
+       '',
+       "DinamicaCopiaLibros"
       );
     } catch (error: any) {
       res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);

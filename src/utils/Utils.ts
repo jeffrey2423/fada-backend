@@ -91,11 +91,11 @@ module Utils {
     return flag;
   }
 
-  export function HoursToSeconds(hours: number): number {
+  function HoursToSeconds(hours: number): number {
     return hours * 60 * 60;
   }
 
-  export function MinutesToSeconds(minutes: number): number {
+  function MinutesToSeconds(minutes: number): number {
     return minutes * 60;
   }
 
@@ -130,12 +130,13 @@ module Utils {
   export function SendSolutionFile(
     req: Request,
     res: Response,
-    solutionData: string
+    solutionData: string,
+    origenFileName: string
   ): void {
     let solutionFileName: string;
     let pathSolutionFile!: string;
     try {
-      solutionFileName = `solution_${new Date().getTime()}.txt`;
+      solutionFileName = `solucion${origenFileName}${new Date().getTime()}.txt`;
       pathSolutionFile = path.join(
         __dirname,
         "..",
@@ -157,13 +158,6 @@ module Utils {
     }
   }
 
-  export function CreateSolutionFileData(...args: string[]): string {
-    let solutionData: string = "";
-    for (let i = 0; i < args.length; i++) {
-      solutionData += args[i] + "\n";
-    }
-    return solutionData;
-  }
 }
 
 export default Utils;

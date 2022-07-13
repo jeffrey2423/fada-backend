@@ -19,7 +19,7 @@ class CopiaLibros implements IRouter {
     this.router
       .route("/SolutionDivideAndConquer")
       .post(
-        this.copiaLibrosServices.SolutionDivideAndConquer.bind(
+        this.copiaLibrosServices.SolucionRecursiva.bind(
           this.copiaLibrosServices
         )
       ); //Se agrega el this porque la instancia original se estaba perdiendo al ser llamado desde una funcion tercera
@@ -27,7 +27,7 @@ class CopiaLibros implements IRouter {
     this.router
       .route("/SolutionDynamicProgramming")
       .post(
-        this.copiaLibrosServices.SolutionDynamicProgramming.bind(
+        this.copiaLibrosServices.SolucionDinamica.bind(
           this.copiaLibrosServices
         )
       );
