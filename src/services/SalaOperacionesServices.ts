@@ -1,59 +1,63 @@
 import Utils from "../utils/Utils";
 import { Response } from "express";
-import { IProcedimiento } from "../interfaces/IProcedimiento";
 
-import SalaOperacionesController from "../controllers/SalaOperacionesController"
+import SalaOperacionesController from "../controllers/SalaOperacionesController";
 
 class SalaOperacionesServices {
-  private salaOperacionescontroller: SalaOperacionesController;
+  private salaOperacionescontroller!: SalaOperacionesController;
 
   constructor() {
     this.salaOperacionescontroller = new SalaOperacionesController();
   }
 
-  /**
-   * Soluciona el problema de la sala de operaciones usando el algoritmo de divide y vencerás
-   * @param req  Solicitud de la peticion
-   * @param res  Respuesta de la peticion
-   */
-  public SolutionDivideAndConquer(req: any, res: Response): void {
+  public SolucionRecursiva(req: any, res: Response): void {
     try {
+      this.salaOperacionescontroller = new SalaOperacionesController();
+
       if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {
-        res.status(Utils.HTTPStatus.BAD_REQUEST).send("No se ha enviado ningun archivo");
+        res
+          .status(Utils.HTTPStatus.BAD_REQUEST)
+          .send("No se ha enviado ningun archivo");
         return;
       }
-      this.salaOperacionescontroller.InitializeProblemData(req.files?.file.data);
+      this.salaOperacionescontroller.InitializeProblemData(
+        req.files?.file.data
+      );
+      this.salaOperacionescontroller.LlamarSolucionRecursiva();
       Utils.SendSolutionFile(
         req,
         res,
-        Utils.CreateSolutionFileData("hola", "hola", "hola")
+        this.salaOperacionescontroller.getSolutionFileData(),
+        "RecursivaSalaOperaciones"
       );
     } catch (error: any) {
-      res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
+      res.json({error_message:error.message, error_status:true});
     }
   }
 
-  /**
-   * Soluciona el problema de la sala de operaciones usando el algoritmo de programacion dinamica
-   * @param req Solicitud de la peticion
-   * @param res Respuesta de la peticion
-   */
-  public SolutionDynamicProgramming(req: any, res: Response): void {
+  public SolucionDinamica(req: any, res: Response): void {
     try {
+      this.salaOperacionescontroller = new SalaOperacionesController();
+
       if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {
-        res.status(Utils.HTTPStatus.BAD_REQUEST).send("No se ha enviado ningun archivo");
+        res
+          .status(Utils.HTTPStatus.BAD_REQUEST)
+          .send("No se ha enviado ningun archivo");
         return;
       }
-      this.salaOperacionescontroller.InitializeProblemData(req.files?.file.data);
+      this.salaOperacionescontroller.InitializeProblemData(
+        req.files?.file.data
+      );
+      this.salaOperacionescontroller.LlamarSolucionDinamica();
       Utils.SendSolutionFile(
         req,
         res,
-        Utils.CreateSolutionFileData("hola", "hola", "hola")
+        this.salaOperacionescontroller.getSolutionFileData(),
+        "DinamicaSalaOperaciones"
       );
     } catch (error: any) {
-      res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
+      res.json({error_message:error.message, error_status:true});
     }
   }
-
 }
 export default SalaOperacionesServices;

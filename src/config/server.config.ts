@@ -1,5 +1,5 @@
 export default {
-  SERVER_PORT: 3000,
+  SERVER_PORT: 9000,
   ENVIROMENT: "DEV",
   DATABASE: {
     DEV: {

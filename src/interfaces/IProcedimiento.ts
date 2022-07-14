@@ -1,5 +1,6 @@
 export interface IProcedimiento {
   nombre: string;
-  horaInicio: number;
-  horaFin: number;
+  horaInicioEnSegundos: number;
+  horaFinEnSegundos: number;
+  duracionEnSegundos: number;
 }

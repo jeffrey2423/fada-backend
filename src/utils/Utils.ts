@@ -2,7 +2,6 @@ import { Response, Request } from "express";
 import path from "path";
 import fs from "fs";
 module Utils {
-
   export enum ContentType {
     JSON = "application/json",
     TEXT = "text/plain",
@@ -92,23 +91,52 @@ module Utils {
     return flag;
   }
 
-  export function HoursToSeconds(hours: number): number {
+  function HoursToSeconds(hours: number): number {
     return hours * 60 * 60;
   }
 
-  export function StringHoursToSeconds(hours: string): number {
-    return HoursToSeconds(parseInt(hours));
+  function MinutesToSeconds(minutes: number): number {
+    return minutes * 60;
+  }
+
+  export function SecondsToHoursAndMinutes(seconds: number): string {
+    let hours: number = Math.floor(seconds / 3600);
+    let minutes: number = Math.floor((seconds - hours * 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  }
+
+  export function HoraASeguntos(hora: string): number {
+    let horaFinalEnSegundos: number = 0;
+    let objHoras: any;
+    let horaEnSegundos: number;
+    let minutosEnSegundos: number;
+
+    try {
+      objHoras = DividirCadena(hora, ":", false);
+      if (!objHoras.status) {
+        throw new Error("Error al dividir la hora, verifique el archivo");
+      }
+
+      horaEnSegundos = HoursToSeconds(parseInt(objHoras.cadena[0]));
+      minutosEnSegundos = MinutesToSeconds(parseInt(objHoras.cadena[1]));
+
+      horaFinalEnSegundos = horaEnSegundos + minutosEnSegundos;
+    } catch (error) {
+      throw error;
+    }
+    return horaFinalEnSegundos;
   }
 
   export function SendSolutionFile(
     req: Request,
     res: Response,
-    solutionData: string
+    solutionData: string,
+    origenFileName: string
   ): void {
     let solutionFileName: string;
     let pathSolutionFile!: string;
     try {
-      solutionFileName = `solution_${new Date().getTime()}.txt`;
+      solutionFileName = `solucion${origenFileName}${new Date().getTime()}.txt`;
       pathSolutionFile = path.join(
         __dirname,
         "..",
@@ -117,12 +145,11 @@ module Utils {
         solutionFileName
       );
       fs.writeFileSync(pathSolutionFile, solutionData);
-      res.setHeader(
-        "Content-disposition",
-        `attachment; filename=${solutionFileName}`
-      );
-      res.setHeader("Content-Type", ContentType.TEXT);
-      res.download(pathSolutionFile, () => {
+      res.set({
+        "Content-Type": ContentType.TEXT,
+        "Content-Disposition": `attachment; filename=${solutionFileName}`
+      });
+      res.download(pathSolutionFile, solutionFileName, () => {
         fs.unlinkSync(pathSolutionFile);
       });
     } catch (error: any) {
@@ -130,13 +157,6 @@ module Utils {
     }
   }
 
-  export function CreateSolutionFileData(...args: string[]): string {
-    let solutionData: string = "";
-    for (let i = 0; i < args.length; i++) {
-      solutionData += args[i] + "\n";
-    }
-    return solutionData;
-  }
 }
 
 export default Utils;
