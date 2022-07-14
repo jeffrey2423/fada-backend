@@ -107,19 +107,19 @@ class SalaOperacionesController {
 
      
 
-      if (inclProf < exclProf) {
+      // if (inclProf < exclProf) {
 
-        if (i != -1) {
-          this.procedimientosEscogidos[i] = [
-            ...this.procedimientosEscogidos[i],
-          ];
-        }
-        this.procedimientosEscogidos[i].push(i);
-      } else {
-        this.procedimientosEscogidos[i] = [
-          ...this.procedimientosEscogidos[i - 1],
-        ];
-      }
+      //   if (i != -1) {
+      //     this.procedimientosEscogidos[i] = [
+      //       ...this.procedimientosEscogidos[i],
+      //     ];
+      //   }
+      //   this.procedimientosEscogidos[i].push(i);
+      // } else {
+      //   this.procedimientosEscogidos[i] = [
+      //     ...this.procedimientosEscogidos[i - 1],
+      //   ];
+      // }
       return Math.max(inclProf, exclProf);
 
     } catch (error) {

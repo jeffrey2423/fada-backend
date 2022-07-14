@@ -31,7 +31,7 @@ class SalaOperacionesServices {
         "RecursivaSalaOperaciones"
       );
     } catch (error: any) {
-      res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
+      res.json({error_message:error.message, error_status:true});
     }
   }
 
@@ -56,7 +56,7 @@ class SalaOperacionesServices {
         "DinamicaSalaOperaciones"
       );
     } catch (error: any) {
-      res.status(Utils.HTTPStatus.INTERNAL_SERVER_ERROR).send(error.message);
+      res.json({error_message:error.message, error_status:true});
     }
   }
 }

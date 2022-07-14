@@ -145,12 +145,11 @@ module Utils {
         solutionFileName
       );
       fs.writeFileSync(pathSolutionFile, solutionData);
-      res.setHeader(
-        "Content-disposition",
-        `attachment; filename=${solutionFileName}`
-      );
-      res.setHeader("Content-Type", ContentType.TEXT);
-      res.download(pathSolutionFile, () => {
+      res.set({
+        "Content-Type": ContentType.TEXT,
+        "Content-Disposition": `attachment; filename=${solutionFileName}`
+      });
+      res.download(pathSolutionFile, solutionFileName, () => {
         fs.unlinkSync(pathSolutionFile);
       });
     } catch (error: any) {
