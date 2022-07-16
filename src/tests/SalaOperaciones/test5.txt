@@ -1,5 +1,9 @@
-4
-cirugia otros,23:00,15:30
-cirugia apendicitis,13:30,15:30
-cirugia hernia,14:30,16:00
-cirugia ojos,15:30,22:00
+8
+proc1,02:00,04:00
+proc2,05:00,08:00
+proc3,09:00,12:00
+proc4,14:00,20:00
+proc5,20:00,23:00
+proc6,03:00,07:00
+proc7,09:00,11:00
+proc8,05:00,12:00

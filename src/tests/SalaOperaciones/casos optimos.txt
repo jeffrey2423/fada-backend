@@ -1,0 +1,23 @@
+test4
+proc1, proc3, proc5
+horas totales: 21
+
+test5
+proc1, proc8, proc4, proc5
+total: 18
+
+test6
+proc1, proc2, proc3, proc4, proc5, proc6
+total: 18.5
+
+test7
+proc1, proc2, proc3, proc4, proc5, proc6
+total: 18.5
+
+test8
+proc1
+total: 23
+
+test9
+proc1
+total: 22.5
