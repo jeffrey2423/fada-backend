@@ -279,16 +279,17 @@ class SalaOperacionesController {
         return arr[n - 1].duracionEnSegundos;
       }
 
-      let inclProf = arr[n - 1].duracionEnSegundos;
+      // Se busca el beneficio cuando el procedimiento actual es incluido
+      let beneficioIncluido = arr[n - 1].duracionEnSegundos;
       let i = this.UltimoProcedimientoSinConflicto(arr, n);
-
       if (i != -1) {
-        inclProf += this.SolucionRecursiva(arr, i + 1);
+        beneficioIncluido += this.SolucionRecursiva(arr, i + 1);
       }
 
-      let exclProf = this.SolucionRecursiva(arr, n - 1);
+      // Se busca el beneficio cuando el procedimiento actual es excluido
+      let beneficioExcluido = this.SolucionRecursiva(arr, n - 1);
 
-      return Math.max(inclProf, exclProf);
+      return Math.max(beneficioIncluido, beneficioExcluido);
 
     } catch (error) {
       throw error;
