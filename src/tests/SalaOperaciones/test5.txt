@@ -1,0 +1,5 @@
+4
+cirugia otros,23:00,15:30
+cirugia apendicitis,13:30,15:30
+cirugia hernia,14:30,16:00
+cirugia ojos,15:30,22:00

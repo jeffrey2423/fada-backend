@@ -31,6 +31,14 @@ class CopiaLibros implements IRouter {
           this.salaOperacionesServices
         )
       );
+
+      this.router
+      .route("/SolucionBasica")
+      .post(
+        this.salaOperacionesServices.SolucionBasica.bind(
+          this.salaOperacionesServices
+        )
+      );
   }
 }
 
