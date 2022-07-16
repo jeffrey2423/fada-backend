@@ -91,11 +91,11 @@ module Utils {
     return flag;
   }
 
-  function HoursToSeconds(hours: number): number {
+  export function HoursToSeconds(hours: number): number {
     return hours * 60 * 60;
   }
 
-  function MinutesToSeconds(minutes: number): number {
+  export function MinutesToSeconds(minutes: number): number {
     return minutes * 60;
   }
 

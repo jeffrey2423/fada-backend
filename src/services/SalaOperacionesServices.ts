@@ -10,6 +10,31 @@ class SalaOperacionesServices {
     this.salaOperacionescontroller = new SalaOperacionesController();
   }
 
+  public SolucionBasica(req: any, res: Response): void {
+    try {
+      this.salaOperacionescontroller = new SalaOperacionesController();
+
+      if (Utils.IsUndefinedOrNullOrEmptyOrFalse(req.files?.file)) {
+        res
+          .status(Utils.HTTPStatus.BAD_REQUEST)
+          .send("No se ha enviado ningun archivo");
+        return;
+      }
+      this.salaOperacionescontroller.InitializeProblemData(
+        req.files?.file.data
+      );
+      this.salaOperacionescontroller.LlamarSolucionRecursiva(2);
+      Utils.SendSolutionFile(
+        req,
+        res,
+        this.salaOperacionescontroller.getSolutionFileData(),
+        "BasicaSalaOperaciones"
+      );
+    } catch (error: any) {
+      res.json({error_message:error.message, error_status:true});
+    }
+  }
+
   public SolucionRecursiva(req: any, res: Response): void {
     try {
       this.salaOperacionescontroller = new SalaOperacionesController();
@@ -23,7 +48,7 @@ class SalaOperacionesServices {
       this.salaOperacionescontroller.InitializeProblemData(
         req.files?.file.data
       );
-      this.salaOperacionescontroller.LlamarSolucionRecursiva();
+      this.salaOperacionescontroller.LlamarSolucionRecursiva(1);
       Utils.SendSolutionFile(
         req,
         res,
