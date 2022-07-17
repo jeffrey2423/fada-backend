@@ -45,7 +45,10 @@ class App {
     this.app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     this.app.use((_req: Request, res: Response, next: NextFunction) => {
       // Configurar el cors
-      res.set(this.config.application.responseHeaders);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Content-Disposition, Accept, Access-Control-Allow-Request-Method');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+      res.setHeader('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
       next();
     });
     this.app.use(fileupload()); // Configurar el fileupload
