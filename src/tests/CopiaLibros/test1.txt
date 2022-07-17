@@ -1,4 +1,11 @@
-3,5
-la senda del perdedor,35
-la iliada,100
-la odisea,60
+4,10
+libro1,20
+libro2,50
+libro3,30
+libro4,40
+libro5,60
+libro6,150
+libro7,100
+libro8,10
+libro9,5
+libro10,15
