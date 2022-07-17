@@ -108,9 +108,9 @@ class CopiaLibrosController {
    * 
    * En total, eso nos toma un tiempo de O(n log n) + O(n(n log n)).
    * 
-   * Si contamos el tiempo que nos toma recorrer el arreglo solucion debemos agregar un tiempo de O(n^2), ya que debemos recorrer
-   * un arrego de arreglos (los subsets obtenidos)
-   * Siendo; O(n log n) + O(n(n log n)) + O(n^2)
+   * Si contamos el tiempo que nos toma recorrer el arreglo solucion debemos agregar un tiempo de O(n*m), siendo n la cantidad 
+   * de subsets(arreglos) obtenidos y m la cantidad de libros dentro de cada subset
+   * Siendo; O(n log n) + O(n(n log n)) + O(n*m)
    */
   private greedyPartition(libros: ILibro[], escritores: number): ILibro[] {
     try {
